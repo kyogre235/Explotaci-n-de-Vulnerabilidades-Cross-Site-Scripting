@@ -1,49 +1,104 @@
+/* Paleta de colores y variables */
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --bg-color: #f8fafc;
+  --text-color: #1e293b;
+  --border-color: #e2e8f0;
+  --card-bg: #ffffff;
+}
+
 body {
-  font-family: Arial;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.5;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-* {
-  box-sizing: border-box;
+/* Contenedor principal para que no se vea todo disperso */
+.main-container {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 50px;
 }
 
-
+/* Estilo del Formulario de Búsqueda (Reflected XSS) */
+form.search-example {
+  display: flex;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
 
 form.search-example input[type=text] {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  float: left;
-  width: 80%;
-  background: #f1f1f1;
+  flex-grow: 1;
+  padding: 14px 20px;
+  font-size: 16px;
+  border: 1px solid var(--border-color);
+  border-right: none;
+  outline: none;
+  background: var(--card-bg);
+  transition: border-color 0.2s;
+}
+
+form.search-example input[type=text]:focus {
+  border-color: var(--primary-color);
 }
 
 form.search-example button {
-  float: left;
-  width: 20%;
-  padding: 20px;
-  background: #2196F3;
+  padding: 0 25px;
+  background: var(--primary-color);
   color: white;
-  font-size: 17px;
-  border: 1px solid grey;
-  border-left: none;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
 form.search-example button:hover {
-  background: #0b7dda;
+  background: var(--primary-hover);
 }
 
+/* El cuadro donde se muestra el resultado (Donde ocurre la magia del XSS) */
 .box {
-  padding: 10px; 
-  border: 1px solid black;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  min-height: 100px;
+  word-wrap: break-word; /* Importante para que los scripts largos no rompan el diseño */
 }
 
-form.search-example::after {
-  content: "";
-  clear: both;
-  display: table;
+/* Estilo para los mensajes o comentarios (Stored XSS) */
+.comment-list {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.comment-item {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .right {
   text-align: right;
+  margin-top: 10px;
+}
+
+/* Efecto para que el usuario sepa dónde inyectar */
+h1, h2 {
+  color: #0f172a;
+  text-align: center;
 }
